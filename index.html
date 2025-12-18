@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad SamiUllah - Full Stack Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <h1 class="loading-name">Muhammad <span>SamiUllah</span></h1>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Loading Portfolio...</p>
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Floating Tech Icons -->
+    <div class="floating-icons">
+        <i class="fab fa-react floating-icon"></i>
+        <i class="fab fa-js floating-icon"></i>
+        <i class="fab fa-node floating-icon"></i>
+        <i class="fab fa-python floating-icon"></i>
+        <i class="fab fa-html5 floating-icon"></i>
+        <i class="fab fa-css3 floating-icon"></i>
+    </div>
+    
+    <!-- Cursor Follower -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-text">MS</span>
+                <span class="logo-name">Muhammad SamiUllah</span>
+            </a>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="animated-bg"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h3 class="greeting">Hello, I'm</h3>
+                    <h1 class="name">Muhammad <span class="highlight">SamiUllah</span></h1>
+                    <h2 class="role">
+                        <span class="typed-text"></span>
+                        <span class="cursor">&nbsp;</span>
+                    </h2>
+                    <div class="availability-badge">
+                        <span class="pulse-dot"></span>
+                        <span>Available for Remote Work</span>
+                    </div>
+                    <p class="hero-description">
+                        Experienced Software Developer & Web Developer specializing in React Native and full-stack development. 
+                        Proven track record with internships and multiple advanced projects. 
+                        Passionate problem solver seeking remote opportunities to build impactful solutions.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Hire Me</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">
+                            <span>View Projects</span>
+                            <i class="fas fa-briefcase"></i>
+                        </a>
+                    </div>
+                    <div class="social-links">
+                        <a href="tel:+923230974723" class="social-link" title="Phone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="mailto:sami.suu1506@gmail.com" class="social-link" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/muhamamd-samiullah-403178394/" target="_blank" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-wrapper">
+                        <div class="rotating-border"></div>
+                        <div class="profile-img">
+                            <div class="avatar-placeholder">
+                                <span class="avatar-initial">MS</span>
+                                <div class="avatar-rings"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <p>Scroll Down</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About <span class="highlight">Me</span></h2>
+                <p class="section-subtitle">Get to know more about my journey and passion</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="about-img-wrapper">
+                        <div class="floating-card">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Internship Experience</span>
+                        </div>
+                        <div class="floating-card">
+                            <i class="fas fa-laptop-code"></i>
+                            <span>Remote Ready</span>
+                        </div>
+                        <div class="floating-card">
+                            <i class="fas fa-rocket"></i>
+                            <span>Fast Learner</span>
+                        </div>
+                        <div class="about-img-inner">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>Software Developer | Problem Solver | Open to Remote Work</h3>
+                    <p class="about-description">
+                        I'm an experienced software developer with hands-on internship experience and a strong portfolio 
+                        of advanced projects. Skilled in React Native, JavaScript, full-stack development, and modern web 
+                        technologies. I specialize in building scalable, user-friendly applications that solve real-world problems.
+                    </p>
+                    <p class="about-description">
+                        With proven experience as a Software Intern and Web Developer, I've successfully delivered multiple 
+                        production-ready applications. I'm passionate about clean code, innovative solutions, and collaborating 
+                        with teams remotely. Actively seeking opportunities to contribute to exciting projects worldwide.
+                    </p>
+                    <div class="about-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span class="info-label">Location</span>
+                                <span class="info-value">Lahore, Pakistan</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <span class="info-label">Education</span>
+                                <span class="info-value">BS Data Science (PUCIT)</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-briefcase"></i>
+                            <div>
+                                <span class="info-label">Experience</span>
+                                <span class="info-value">Software Intern & Developer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Get In Touch</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical <span class="highlight">Skills</span></h2>
+                <p class="section-subtitle">Technologies and tools I work with</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Problem Solving</h3>
+                    <p>Algorithmic Thinking & Complex Solutions</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="95"></div>
+                    </div>
+                    <span class="skill-percentage">95%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <h3>JavaScript</h3>
+                    <p>Modern ES6+ and Async Programming</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="85"></div>
+                    </div>
+                    <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3>React.js</h3>
+                    <p>Component-based UI Development</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="80"></div>
+                    </div>
+                    <span class="skill-percentage">80%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3>React Native</h3>
+                    <p>Cross-platform Mobile Development</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="80"></div>
+                    </div>
+                    <span class="skill-percentage">80%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Structures</h3>
+                    <p>Algorithms & Problem Solving</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="88"></div>
+                    </div>
+                    <span class="skill-percentage">88%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3>Node.js</h3>
+                    <p>Backend Development & APIs</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="85"></div>
+                    </div>
+                    <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Firebase</h3>
+                    <p>Real-time Database & Authentication</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="82"></div>
+                    </div>
+                    <span class="skill-percentage">82%</span>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <h3>Git & GitHub</h3>
+                    <p>Version Control & Collaboration</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="88"></div>
+                    </div>
+                    <span class="skill-percentage">88%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Work <span class="highlight">Experience</span></h2>
+                <p class="section-subtitle">My professional journey</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <span class="timeline-date">2024 - 2025</span>
+                            <h3>Software Development Intern</h3>
+                            <h4>Technology Company - Software Engineering & Development</h4>
+                            <ul>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Developed and deployed multiple full-stack applications using React Native and modern JavaScript frameworks
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Collaborated with cross-functional teams to design, develop, and deliver scalable software solutions
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Implemented RESTful APIs and integrated third-party services to enhance application functionality
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Optimized application performance and resolved complex technical challenges
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <span class="timeline-date">2024</span>
+                            <h3>Web Developer Intern</h3>
+                            <h4>Web Development Agency - React Native & Frontend Development</h4>
+                            <ul>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Built responsive and dynamic web applications using React Native and JavaScript
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Designed intuitive user interfaces with focus on user experience and accessibility
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Worked with state management libraries and modern development tools
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Participated in code reviews and contributed to team best practices
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <span class="timeline-date">2023 - Present</span>
+                            <h3>Teaching Assistant</h3>
+                            <h4>PUCIT - Programming Fundamentals & Problem Solving</h4>
+                            <ul>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Mentored students in programming concepts, data structures, and problem-solving techniques
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Conducted hands-on coding sessions and provided technical guidance
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    Developed strong communication and leadership skills through teaching
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+                <p class="section-subtitle">Some of my recent work</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card featured-project">
+                    <div class="featured-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Internship Project</span>
+                    </div>
+                    <div class="project-image">
+                        <i class="fas fa-university"></i>
+                        <div class="project-overlay">
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Educational Registration Platform</h3>
+                            <span class="project-tag">React + TypeScript | Vite</span>
+                        </div>
+                        <p>Comprehensive educational institution management system with admin dashboard, user authentication, college management, and real-time analytics built during internship</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Role-Based Auth</span>
+                            <span><i class="fas fa-check"></i> Admin Dashboard</span>
+                            <span><i class="fas fa-check"></i> Data Analytics</span>
+                            <span><i class="fas fa-check"></i> User Management</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>React 18</span>
+                            <span>TypeScript</span>
+                            <span>Tailwind CSS</span>
+                            <span>shadcn/ui</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card featured-project">
+                    <div class="featured-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Internship Project</span>
+                    </div>
+                    <div class="project-image">
+                        <i class="fas fa-hospital"></i>
+                        <div class="project-overlay">
+                            <a href="https://github.com/M-SAMIULLAH786/Hospital-Management-System" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/M-SAMIULLAH786/Hospital-Management-System" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Hospital Management System</h3>
+                            <span class="project-tag">OOP | C++</span>
+                        </div>
+                        <p>Full-featured hospital management system with patient records, doctor scheduling, appointment management, and billing system using advanced OOP principles</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Patient Records</span>
+                            <span><i class="fas fa-check"></i> Appointments</span>
+                            <span><i class="fas fa-check"></i> Billing System</span>
+                            <span><i class="fas fa-check"></i> File Management</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>C++</span>
+                            <span>OOP</span>
+                            <span>File Handling</span>
+                            <span>Data Structures</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card featured-project">
+                    <div class="featured-badge">
+                        <i class="fas fa-star"></i>
+                        <span>AI Project</span>
+                    </div>
+                    <div class="project-image">
+                        <i class="fas fa-robot"></i>
+                        <div class="project-overlay">
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Cortana - AI Career Coach</h3>
+                            <span class="project-tag">Python | GROQ | Gradio</span>
+                        </div>
+                        <p>Elite AI-powered career counselor with interview prep, resume analysis, salary negotiation coaching, and career guidance using GROQ's LLM technology</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Mock Interviews</span>
+                            <span><i class="fas fa-check"></i> Resume Review</span>
+                            <span><i class="fas fa-check"></i> Salary Coaching</span>
+                            <span><i class="fas fa-check"></i> Career Guidance</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>GROQ API</span>
+                            <span>Gradio</span>
+                            <span>LLM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-utensils"></i>
+                        <div class="project-overlay">
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Flavor Haven - Food Ordering</h3>
+                            <span class="project-tag">React | Context API</span>
+                        </div>
+                        <p>Interactive food ordering application with dynamic cart system, modal checkout, payment options, tip calculator, and smooth animations</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Dynamic Cart</span>
+                            <span><i class="fas fa-check"></i> Order Form</span>
+                            <span><i class="fas fa-check"></i> Payment System</span>
+                            <span><i class="fas fa-check"></i> Animations</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>Context API</span>
+                            <span>CSS Modules</span>
+                            <span>Hooks</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-hospital"></i>
+                        <div class="project-overlay">
+                            <a href="https://github.com/M-SAMIULLAH786/Hospital-Management-System" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/M-SAMIULLAH786/Hospital-Management-System" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Hospital Management System</h3>
+                            <span class="project-tag">C++ | OOP</span>
+                        </div>
+                        <p>Designed and implemented a console-based hospital management system using OOP principles in C++</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Patient Registration</span>
+                            <span><i class="fas fa-check"></i> Doctor Records</span>
+                            <span><i class="fas fa-check"></i> Appointment Scheduling</span>
+                            <span><i class="fas fa-check"></i> Billing System</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>OOP</span>
+                            <span>File Handling</span>
+                            <span>Data Structures</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-wallet"></i>
+                        <div class="project-overlay">
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Expense Tracker</h3>
+                            <span class="project-tag">React | Hooks</span>
+                        </div>
+                        <p>Track daily expenses with filtering by year, visual spending charts, and comprehensive expense management using React state and hooks</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Expense Tracking</span>
+                            <span><i class="fas fa-check"></i> Year Filtering</span>
+                            <span><i class="fas fa-check"></i> Visual Charts</span>
+                            <span><i class="fas fa-check"></i> State Management</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>useState</span>
+                            <span>useEffect</span>
+                            <span>CSS3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-bag"></i>
+                        <div class="project-overlay">
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Bazar E-Commerce</h3>
+                            <span class="project-tag">React | Full Project</span>
+                        </div>
+                        <p>Complete e-commerce platform with product listings, shopping cart, checkout process, and modern UI components built with React</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Product Catalog</span>
+                            <span><i class="fas fa-check"></i> Shopping Cart</span>
+                            <span><i class="fas fa-check"></i> Checkout Flow</span>
+                            <span><i class="fas fa-check"></i> Responsive</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>Context API</span>
+                            <span>React Router</span>
+                            <span>CSS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-question-circle"></i>
+                        <div class="project-overlay">
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Interactive Quiz App</h3>
+                            <span class="project-tag">React | JavaScript</span>
+                        </div>
+                        <p>Engaging quiz application with timer, score tracking, question navigation, and results analysis with reusable React components</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Timer System</span>
+                            <span><i class="fas fa-check"></i> Score Tracking</span>
+                            <span><i class="fas fa-check"></i> Results Analysis</span>
+                            <span><i class="fas fa-check"></i> Navigation</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>JavaScript</span>
+                            <span>Hooks</span>
+                            <span>CSS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-tasks"></i>
+                        <div class="project-overlay">
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>TaskZen - To-Do List App</h3>
+                            <span class="project-tag">React Native | JavaScript</span>
+                        </div>
+                        <p>Minimalist mobile to-do list app with task creation, editing, deletion, filtering, and local state management for seamless task tracking</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Task Management</span>
+                            <span><i class="fas fa-check"></i> Local Storage</span>
+                            <span><i class="fas fa-check"></i> Task Filtering</span>
+                            <span><i class="fas fa-check"></i> Mobile UI</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>React Native</span>
+                            <span>JavaScript</span>
+                            <span>AsyncStorage</span>
+                            <span>Mobile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Education <span class="highlight">Background</span></h2>
+                <p class="section-subtitle">My academic journey</p>
+            </div>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="education-content">
+                        <span class="education-year">Expected 2027</span>
+                        <h3>BS Data Science</h3>
+                        <h4>Punjab University College of Information Technology (PUCIT)</h4>
+                    </div>
+                </div>
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="education-content">
+                        <span class="education-year">Completed</span>
+                        <h3>Intermediate (ICS)</h3>
+                        <h4>Government College, Lahore</h4>
+                        <div class="education-details">
+                            <p class="education-board">Board of Intermediate and Secondary Education</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In <span class="highlight">Touch</span></h2>
+                <p class="section-subtitle">Let's work together on your next project</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="method-info">
+                                <span class="method-label">Phone</span>
+                                <a href="tel:+923230974723">+92 323 0974723</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-info">
+                                <span class="method-label">Email</span>
+                                <a href="mailto:sami.suu1506@gmail.com">sami.suu1506@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-info">
+                                <span class="method-label">Location</span>
+                                <span>Lahore, Pakistan</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links-contact">
+                        <a href="https://www.linkedin.com/in/muhamamd-samiullah-403178394/" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/M-SAMIULLAH786" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="tel:+923230974723" class="social-link">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="mailto:sami.suu1506@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Subject" required>
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2025 Muhammad SamiUllah. All rights reserved.</p>
+                    <p>Built with <i class="fas fa-heart"></i> and passion</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
