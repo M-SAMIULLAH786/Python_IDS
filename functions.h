@@ -1,106 +1,172 @@
-#ifndef ARRAY_H
-#define ARRAY_H
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
+
+
 #include <iostream>
 using namespace std;
 
-
-template <typename T>
-class MyArray {
+class Node {
 private:
-    T* data;
-    int size;
-    int capacity;
-
+    int data;
+    Node* next;
 
 public:
-    MyArray();//constructor
-    ~MyArray();//destructor
-    void append(T value);//Add function to add an element at the last index of the array
-    void prepend(T value);// Add function to add an element at the start index of the array
-    void deleteFromEnd();// Add function to contract an array by deleting a value from the last index
-    void deleteFromStart();// Add function to contract an array by deleting a value from the first index
-    void display() const;// Add function to display the elements of the array
-    void resize(int newCapacity);
-    int get_size() const;//getsizeofarray
-    int get_capacity() const;
-    T* get_array() const;
+    Node(int data, Node* next = nullptr) : data(data), next(next) {}
+    int getData() { return data; }
+    void setData(int data) { this->data = data; }
+    Node* getNext() { return next; }
+    void setNext(Node* next) { this->next = next; }
 };
-template <typename T>
-int MyArray<T>::get_size()const {
-    return size;
-}
-template <typename T>
-int MyArray<T>::get_capacity() const {
-    return capacity;
-}
-template <typename T>
-T* MyArray<T>::get_array()const {
-    return data;
-}
+class List {
+private:
+    Node* head;       // Pointer to the first node
+    Node* tail;       // Pointer to the last node
+    int count;        // Number of elements in the list
 
-template <typename T>
-MyArray<T>::MyArray() {
-    size=0;
-    capacity=15;
-    data =new T[capacity];
-}
-template <typename T>
-MyArray<T>::~MyArray() {
-    delete[] data;
-}
-template <typename T>
-void MyArray<T>::append(T value) {
-    if (size==capacity) {
-        resize(capacity*2);
-    }
-    data[size]=value;
-    ++size;
-}
-template <typename T>
-void MyArray<T>::prepend(T value) {
-    if (size==capacity) {
-        resize(capacity*2);
-    }
-    for (int i=size; i>0;--i) {
-        data[i]=data[i-1];
-    }
-    data[0]=value;
-    ++size;
-}
-template <typename T>
-void MyArray<T>::deleteFromEnd() {
-    if(size>0) {
-        --size;
-    }
-}
-template <typename T>
-void MyArray<T>::deleteFromStart() {
-    if (size>0){
-        for(int i=0; i<size-1; ++i) {
-            data[i]=data[i+1];
+public:
+    // Constructor
+    List() : head(nullptr), tail(nullptr), count(0) {}
+
+    // Destructor
+    ~List() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* temp = current;
+            current = current->getNext();
+            delete temp;
         }
-        --size;
     }
-}
-template <typename T>
-void MyArray<T>::display() const{
-    for (int i=0; i<size;++i) {
-        cout<<data[i]<<", ";
+
+    // Check if the list is empty
+    bool isEmpty() {
+        return count == 0;
     }
-    cout<<endl;
-}
-template <typename T>
-void MyArray<T>::resize(int newCapacity) {
-    T* temp= new T[newCapacity];
-    for (int i=0; i<size; ++i) {
-        temp[i]=data[i];
+
+    // Add a new node at the end of the list
+    void append(int data) {
+        Node* newNode = new Node(data);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            tail->setNext(newNode);
+            tail = newNode;
+        }
+        count++;
     }
-    delete[] data;
-    data=temp;
-    capacity=newCapacity;
-}
+
+    // Add a new node at the start of the list
+    void prepend(int data) {
+        Node* newNode = new Node(data, head);
+        if (isEmpty()) {
+            tail = newNode;
+        }
+        head = newNode;
+        count++;
+    }
+
+    // Insert a node at the specified index
+    void insertAtIndex(int data, int index) {
+        if (index < 0 || index > count) {
+            cout << "Index out of bounds." << endl;
+            return;
+        }
+
+        if (index == 0) {
+            prepend(data);
+        } else if (index == count) {
+            append(data);
+        } else {
+            Node* current = head;
+            for (int i = 0; i < index - 1; i++) {
+                current = current->getNext();
+            }
+            Node* newNode = new Node(data, current->getNext());
+            current->setNext(newNode);
+            count++;
+        }
+    }
+
+    // Delete the last node
+    void deleteFromEnd() {
+        if (isEmpty()) {
+            cout << "List is empty." << endl;
+            return;
+        }
+
+        if (head == tail) {
+            delete head;
+            head = tail = nullptr;
+        } else {
+            Node* current = head;
+            while (current->getNext() != tail) {
+                current = current->getNext();
+            }
+            delete tail;
+            tail = current;
+            tail->setNext(nullptr);
+        }
+        count--;
+    }
+
+    // Delete the first node
+    void deleteFromStart() {
+        if (isEmpty()) {
+            cout << "List is empty." << endl;
+            return;
+        }
+
+        Node* temp = head;
+        head = head->getNext();
+        if (head == nullptr) {
+            tail = nullptr;
+        }
+        delete temp;
+        count--;
+    }
+
+    // Delete the node at the specified index
+    void deleteFromIndex(int index) {
+        if (index < 0 || index >= count) {
+            cout << "Index out of bounds." << endl;
+            return;
+        }
+
+        if (index == 0) {
+            deleteFromStart();
+        } else if (index == count - 1) {
+            deleteFromEnd();
+        } else {
+            Node* current = head;
+            for (int i = 0; i < index - 1; i++) {
+                current = current->getNext();
+            }
+            Node* temp = current->getNext();
+            current->setNext(temp->getNext());
+            delete temp;
+            count--;
+        }
+    }
+
+    // Get the head pointer
+    Node* getHead() const {
+        return head;
+    }
+
+    Node* getTail() const {
+        return tail;
+    }
 
 
+    // Print the list
+    void printList() {
+        Node* current = head;
+        while (current != nullptr) {
+            cout << current->getData() << " -> ";
+            current = current->getNext();
+        }
+        cout << "null" << endl;
+    }
+};
 
 
 #endif
