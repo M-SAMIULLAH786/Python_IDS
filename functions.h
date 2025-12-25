@@ -1,172 +1,146 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-
 #include <iostream>
+#include <queue>
 using namespace std;
 
-class Node {
-private:
+class TreeNode {
+public:
     int data;
-    Node* next;
+    TreeNode* left;
+    TreeNode* right;
 
-public:
-    Node(int data, Node* next = nullptr) : data(data), next(next) {}
-    int getData() { return data; }
-    void setData(int data) { this->data = data; }
-    Node* getNext() { return next; }
-    void setNext(Node* next) { this->next = next; }
-};
-class List {
-private:
-    Node* head;       // Pointer to the first node
-    Node* tail;       // Pointer to the last node
-    int count;        // Number of elements in the list
-
-public:
-    // Constructor
-    List() : head(nullptr), tail(nullptr), count(0) {}
-
-    // Destructor
-    ~List() {
-        Node* current = head;
-        while (current != nullptr) {
-            Node* temp = current;
-            current = current->getNext();
-            delete temp;
-        }
+    TreeNode(int value) {
+        data = value;
+        left = nullptr;
+        right = nullptr;
     }
 
-    // Check if the list is empty
-    bool isEmpty() {
-        return count == 0;
+    TreeNode* getLeftChild() {
+        return left;
     }
 
-    // Add a new node at the end of the list
-    void append(int data) {
-        Node* newNode = new Node(data);
-        if (isEmpty()) {
-            head = tail = newNode;
-        } else {
-            tail->setNext(newNode);
-            tail = newNode;
-        }
-        count++;
+    TreeNode* getRightChild() {
+        return right;
     }
 
-    // Add a new node at the start of the list
-    void prepend(int data) {
-        Node* newNode = new Node(data, head);
-        if (isEmpty()) {
-            tail = newNode;
-        }
-        head = newNode;
-        count++;
+    int getData() {
+        return data;
     }
 
-    // Insert a node at the specified index
-    void insertAtIndex(int data, int index) {
-        if (index < 0 || index > count) {
-            cout << "Index out of bounds." << endl;
-            return;
-        }
-
-        if (index == 0) {
-            prepend(data);
-        } else if (index == count) {
-            append(data);
-        } else {
-            Node* current = head;
-            for (int i = 0; i < index - 1; i++) {
-                current = current->getNext();
-            }
-            Node* newNode = new Node(data, current->getNext());
-            current->setNext(newNode);
-            count++;
-        }
+    void addLeftChild(TreeNode* node) {
+        left = node;
     }
 
-    // Delete the last node
-    void deleteFromEnd() {
-        if (isEmpty()) {
-            cout << "List is empty." << endl;
-            return;
-        }
-
-        if (head == tail) {
-            delete head;
-            head = tail = nullptr;
-        } else {
-            Node* current = head;
-            while (current->getNext() != tail) {
-                current = current->getNext();
-            }
-            delete tail;
-            tail = current;
-            tail->setNext(nullptr);
-        }
-        count--;
-    }
-
-    // Delete the first node
-    void deleteFromStart() {
-        if (isEmpty()) {
-            cout << "List is empty." << endl;
-            return;
-        }
-
-        Node* temp = head;
-        head = head->getNext();
-        if (head == nullptr) {
-            tail = nullptr;
-        }
-        delete temp;
-        count--;
-    }
-
-    // Delete the node at the specified index
-    void deleteFromIndex(int index) {
-        if (index < 0 || index >= count) {
-            cout << "Index out of bounds." << endl;
-            return;
-        }
-
-        if (index == 0) {
-            deleteFromStart();
-        } else if (index == count - 1) {
-            deleteFromEnd();
-        } else {
-            Node* current = head;
-            for (int i = 0; i < index - 1; i++) {
-                current = current->getNext();
-            }
-            Node* temp = current->getNext();
-            current->setNext(temp->getNext());
-            delete temp;
-            count--;
-        }
-    }
-
-    // Get the head pointer
-    Node* getHead() const {
-        return head;
-    }
-
-    Node* getTail() const {
-        return tail;
-    }
-
-
-    // Print the list
-    void printList() {
-        Node* current = head;
-        while (current != nullptr) {
-            cout << current->getData() << " -> ";
-            current = current->getNext();
-        }
-        cout << "null" << endl;
+    void addRightChild(TreeNode* node) {
+        right = node;
     }
 };
 
+class Tree {
+public:
+    TreeNode* root;
+
+    Tree() {
+        root = nullptr;
+    }
+
+    void insertNode(int value) {
+        TreeNode* newNode = new TreeNode(value);
+        if (root == nullptr) {
+            root = newNode;
+            return;
+        }
+        queue<TreeNode*> que;
+        que.push(root);
+        while (!que.empty()) {
+            TreeNode* current = que.front();
+            que.pop();
+            if (current->left == nullptr) {
+                current->left = newNode;
+                return;
+            } else {
+                que.push(current->left);
+            }
+            if (current->right == nullptr) {
+                current->right = newNode;
+                return;
+            } else {
+                que.push(current->right);
+            }
+        }
+    }
+    void printTree() {
+        if (root == nullptr) return;
+        queue<TreeNode*> que;
+        que.push(root);
+        while (!que.empty()) {
+            TreeNode* current = que.front();
+            que.pop();
+            cout << current->data << " ";
+            if (current->left != nullptr) {
+                que.push(current->left);
+            }
+            if (current->right != nullptr) {
+                que.push(current->right);
+            }
+        }
+        cout << endl;
+    }
+
+    int getDegree(int data) {
+        TreeNode* current = root;
+        while (current != nullptr) {
+            if (current->data == data) {
+                int degree = 0;
+                if (current->left != nullptr) degree++;
+                if (current->right != nullptr) degree++;
+                return degree;
+            }
+            if (data < current->data) {
+                current = current->left;
+            } else {
+                current = current->right;
+            }
+        }
+        return -1;
+    }
+        int getTreeHeight() {
+            return getHeight(root);
+        }
+    int getHeight(TreeNode* node) {
+        if (node == nullptr) {
+            return -1;
+        }
+        int leftHeight = getHeight(node->getLeftChild());
+        int rightHeight = getHeight(node->getRightChild());
+        int maxHeight;
+        if (leftHeight > rightHeight) {
+            maxHeight = leftHeight;
+        } else {
+            maxHeight = rightHeight;
+        }
+        return 1 + maxHeight;
+    }
+        int getHeight(int data) {
+            TreeNode* current = root;
+            while (current != nullptr) {
+                if (current->data == data) {
+                    return getHeight(current);
+                }
+                if (data < current->data) {
+                    current = current->left;
+                } else {
+                    current = current->right;
+                }
+            }
+            return -1;
+        }
+
+    TreeNode* getRoot() {
+        return root;
+    }
+};
 
 #endif

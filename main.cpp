@@ -1,52 +1,24 @@
 #include <iostream>
-#include "functions.h" // Assumes Node and List class are defined here
+#include "functions.h"
 using namespace std;
 
-// Function to print the linked list
-void printList(const List& list) {
-    Node* current = list.getHead();
-    while (current) {
-        cout << current->getData() << " ";
-        current = current->getNext();
-    }
-    cout << endl;
-}
 
 int main() {
-    List list;
+    Tree tree;
+    tree.insertNode(10);
+    tree.insertNode(5);
+    tree.insertNode(20);
 
-    // Append elements to the list
-    list.append(10);
-    list.append(20);
-    list.append(30);
-    cout << "List after appending 10, 20, 30:" << endl;
-    printList(list);
+    cout << "Nodes in the tree: " << endl;
+    tree.printTree();
+    cout << "Degree of 10: " << tree.getDegree(10) << endl;
+    cout << "Degree of 12: " << tree.getDegree(5) << endl;
+    cout << "Degree of 20: " << tree.getDegree(20) << endl;
+    cout << "Height of the tree: " << tree.getTreeHeight() << endl;
+    cout << "Height of node 10: " << tree.getHeight(10) << endl;
+    cout << "Height of node 5: " << tree.getHeight(5) << endl;
+    cout << "Height of node 20: " << tree.getHeight(20) << endl;
 
-    // Prepend an element to the list
-    list.prepend(5);
-    cout << "List after prepending 5:" << endl;
-    printList(list);
-
-    // Insert an element at a specific index
-    list.insertAtIndex(15, 2);
-    cout << "List after inserting 15 at index 2:" << endl;
-    printList(list);
-
-    // Delete the last element
-    list.deleteFromEnd();
-    cout << "List after deleting from end:" << endl;
-    printList(list);
-
-    // Delete the first element
-    list.deleteFromStart();
-    cout << "List after deleting from start:" << endl;
-    printList(list);
-
-    // Delete an element at a specific index
-    list.deleteFromIndex(1);
-    cout << "List after deleting from index 1:" << endl;
-    printList(list);
 
     return 0;
 }
-
