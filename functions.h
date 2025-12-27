@@ -2,253 +2,171 @@
 #define FUNCTIONS_H
 
 #include <iostream>
-#include <stdexcept>
 using namespace std;
 
-template<typename T>
-class MyArray {
+class Stack {
 private:
-    T* arr1D;
-    T** arr2D;
-    T*** arr3D;
-    int d0, d1, d2;
+    int* array;      // Pointer to the dynamic array
+    int size;        // Current size of the stack
+    int capacity;    // Current capacity of the stack
 
 public:
-
-    T* get1DArray() {
-        return arr1D;
-    }
-    T** get2DArray() {
-        return arr2D;
-    }
-    T*** get3DArray() {
-        return arr3D;
-    }
-    MyArray(int d0, int d1 = 0, int d2 = 0) : d0(d0), d1(d1), d2(d2), arr1D(0), arr2D(0), arr3D(0) {
-        if (d1 == 0 && d2 == 0) {
-            arr1D = new T[d0];
-        } else if (d2 == 0) {
-            arr2D = new T*[d1];
-            for (int m = 0; m < d1; m++) {
-                arr2D[m] = new T[d0];
-            }
-        } else {
-            arr3D = new T**[d2];
-            for (int n = 0; n < d2; n++) {
-                arr3D[n] = new T*[d1];
-                for (int m = 0; m < d1; m++) {
-                    arr3D[n][m] = new T[d0];
-                }
-            }
-        }
+    // Constructor
+    Stack() {
+        capacity = 10;            // Initial capacity of the stack
+        size = 0;                 // Stack initially empty
+        array = new int[capacity]; // Allocate memory for the stack
     }
 
     // Destructor
-    ~MyArray() {
-        if (arr1D) {
-            delete[] arr1D;
-        } else if (arr2D) {
-            for (int m = 0; m < d1; m++) {
-                delete[] arr2D[m];
+    ~Stack() {
+        delete[] array; // Free the allocated memory
+    }
+
+    // Check if the stack is empty
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    // Push an element onto the stack
+    void push(int data) {
+        if (size == capacity) {
+            // Double the capacity if the array is full
+            int newCapacity = capacity * 2;
+            int* newArray = new int[newCapacity];
+
+            // Copy existing elements to the new array
+            for (int i = 0; i < size; i++) {
+                newArray[i] = array[i];
             }
-            delete[] arr2D;
-        } else if (arr3D) {
-            for (int n = 0; n < d2; n++) {
-                for (int m = 0; m < d1; m++) {
-                    delete[] arr3D[n][m];
-                }
-                delete[] arr3D[n];
+
+            // Free old array and update capacity
+            delete[] array;
+            array = newArray;
+            capacity = newCapacity;
+        }
+
+        // Add the new element and update size
+        array[size] = data;
+        size++;
+    }
+
+    // Pop the top element from the stack
+    void pop() {
+        if (isEmpty()) {
+            cout << "Error: Stack is empty, cannot pop!" << endl;
+            return;
+        }
+
+        // Remove the top element
+        size--;
+
+        // Shrink the array if necessary
+        if (size <= capacity / 4 && capacity > 10) {
+            int newCapacity = capacity / 2;
+            int* newArray = new int[newCapacity];
+
+            // Copy existing elements to the new array
+            for (int i = 0; i < size; i++) {
+                newArray[i] = array[i];
             }
-            delete[] arr3D;
+
+            // Free old array and update capacity
+            delete[] array;
+            array = newArray;
+            capacity = newCapacity;
         }
     }
 
-    // Create method
-    static MyArray* create(int d0 = 0, int d1 = 0, int d2 = 0) {
-        return new MyArray(d0, d1, d2);
+    // Get the number of elements in the stack
+    int getSize() {
+        return size;
     }
 
-    // Set element
-    void setElement(T value, int index0, int index1 = 0, int index2 = 0) {
-        if (arr1D) {
-            if (index0 >= d0) {
-                cout << "Index out of bound";
-                return;
-            }
-            arr1D[index0] = value;
-        } else if (arr2D) {
-            if (index1 >= d1 || index0 >= d0) {
-                cerr << "Index out of bounds";
-                return;
-            }
-            arr2D[index1][index0] = value;
-        } else if (arr3D) {
-            if (index2 >= d2 || index1 >= d1 || index0 >= d0) {
-                cerr << "Index out of bounds";
-                return;
-            }
-            arr3D[index2][index1][index0] = value;
-        }
+    // Clear all elements from the stack
+    void clear() {
+        size = 0;
     }
 
-    // Get element
-    T getElement(int index0, int index1 = 0, int index2 = 0) const {
-        if (arr1D) {
-            if (index0 >= d0) {
-                cout << "Index out of bounds";
-                return T();
-            }
-            return arr1D[index0];
-        } else if (arr2D) {
-            if (index1 >= d1 || index0 >= d0) {
-                cout << "Index out of bounds!";
-                return T();
-            }
-            return arr2D[index1][index0];
-        } else if (arr3D) {
-            if (index2 >= d2 || index1 >= d1 || index0 >= d0) {
-                cout << "Index out of bounds!";
-                return T();
-            }
-            return arr3D[index2][index1][index0];
+    // Print all elements in the stack from top to bottom
+    void printStack() {
+        if (isEmpty()) {
+            cout << "Stack is empty!" << endl;
+            return;
         }
-        return T();
+
+        for (int i = size - 1; i >= 0; i--) {
+            cout << array[i] << " ";
+        }
+        cout << endl;
     }
 
-    // Get dimensions
-    int getDimensions() const {
-        if (arr1D) {
-            return 1;
-        } else if (arr2D) {
-            return 2;
-        } else if (arr3D) {
-            return 3;
-        }
-        return 0;
-    }
-
-    // Display array
-    void display() const {
-        if (arr1D) {
-            for (int l = 0; l < d0; l++) {
-                cout << arr1D[l] << "\t";
-            }
-            cout << endl;
-        } else if (arr2D) {
-            for (int m = 0; m < d1; m++) {
-                for (int l = 0; l < d0; l++) {
-                    cout << arr2D[m][l] << "\t";
-                }
-                cout << endl;
-            }
-        } else if (arr3D) {
-            for (int n = 0; n < d2; n++) {
-                cout << "Layer " << n + 1 << ":\n";
-                for (int m = 0; m < d1; m++) {
-                    for (int l = 0; l < d0; l++) {
-                        cout << arr3D[n][m][l] << " ";
-                    }
-                    cout << endl;
-                }
-            }
-        }
-    }
-    T* getRow3D(int r, int l) const {
-        if (arr3D && r < d1 && l < d2) {
-            return arr3D[l][r];
-        }
-    }
-    void radixSort1D(T* array, int size) {
-        T maxval = array[0];
-        for (int l = 1; l < size; l++) {
-            if (array[l] > maxval) {
-                maxval = array[l];
-            }
-        }
-        int maxDigits = 0;
-        while (maxval > 0) {
-            maxDigits++;
-            maxval /= 10;
-        }
-        T* result = new T[size];
-
-        int exponent = 1;
-        for (int d = 0; d < maxDigits; d++) {
-            int arr[10] = {0};
-            for (int l = 0; l < size; l++) {
-                int digit = (array[l] / exponent) % 10;
-                arr[digit]++;
-            }
-            for (int l = 1; l < 10; l++) {
-                arr[l] += arr[l - 1];
-            }
-            for (int l = size - 1; l >= 0; l--) {
-                int digit = (array[l] / exponent) % 10;
-                result[--arr[digit]] = array[l];
-            }
-            for (int l = 0; l < size; l++) {
-                array[l] = result[l];
-            }
-            exponent *= 10;
-        }
-        delete[] result;
-    }
-void countSort1D(T* array, int size) {
-    T maxVal = array[0], minVal = array[0];
-    for (int l = 1; l < size; l++) {
-        if (array[l] > maxVal) maxVal = array[l];
-        if (array[l] < minVal) minVal = array[l];
-    }
-    int range = maxVal - minVal + 1;
-    int* count = new int[range] {0};
-    for (int l = 0; l < size; l++) {
-        count[array[l] - minVal]++;
-    }
-
-    for (int l = 1; l < range; l++) {
-        count[l] += count[l - 1];
-    }
-    T* output = new T[size];
-    for (int l = size - 1; l >= 0; l--) {
-        count[array[l] - minVal]--;
-        int index = count[array[l] - minVal];
-        output[index] = array[l];
-
-    }
-    for (int l = 0; l < size; l++) {
-        array[l] = output[l];
-    }
-
-    delete[] count;
-    delete[] output;
-}
-
-    void radixSort2D() {
-        for (int m = 0; m < d1; m++) {
-            radixSort1D(arr2D[m], d0);
-        }
-    }
-    void countSort2D() {
-        for (int m = 0; m < d1; m++) {
-            countSort1D(arr2D[m], d0);
-        }
-    }
-
-    void radixSort3D() {
-        for (int n = 0; n < d2; n++) {
-            for (int m = 0; m < d1; m++) {
-                radixSort1D(arr3D[n][m], d0);
-            }
-        }
-    }
-
-    void countSort3D() {
-        for (int n = 0; n < d2; n++) {
-            for (int m = 0; m < d1; m++) {
-                countSort1D(arr3D[n][m], d0);
-            }
-        }
+    // Access the internal array (added for testing)
+    int* getStack() {
+        return array;
     }
 };
+
+
+class Queue {
+private:
+    int* array;
+    int size;
+    int capacity;
+    int front;
+    int rear;
+
+public:
+
+    Queue() : size(0), capacity(10), front(0), rear(0) {
+        array = new int[capacity];
+    }
+
+    ~Queue() {
+        delete[] array;
+    }
+
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    void enqueue(int data) {
+        if (size >= capacity) {
+            cout << "Queue is full " << data  <<endl;
+            return;
+        }
+        array[size] = data;
+        size++;
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+           cout<< "Queue is empty." << endl;
+            return;
+        }
+        for (int i = 0; i < size - 1; ++i) {
+            array[i] = array[i + 1];
+        }
+        size--;
+    }
+
+
+    int getSize() {
+        return size;
+    }
+int *getQueue() {
+  return array;
+}
+    void printQueue() {
+        for (int i = front; i < front + size; i++) {
+            cout << array[i] << " ";
+        }
+        cout << endl;
+    }
+    void clear() {
+        size = 0;
+    }
+};
+
 
 #endif
