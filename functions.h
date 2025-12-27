@@ -2,145 +2,213 @@
 #define FUNCTIONS_H
 
 #include <iostream>
-#include <queue>
 using namespace std;
 
-class TreeNode {
+class Edge {
+    int destination;
+    int cost;
+    Edge* next;
+
 public:
-    int data;
-    TreeNode* left;
-    TreeNode* right;
+    Edge(int dest, int c) : destination(dest), cost(c), next(nullptr) {
 
-    TreeNode(int value) {
-        data = value;
-        left = nullptr;
-        right = nullptr;
+    }
+    int getDestination() const {
+      return destination;
+    }
+    int getCost() const {
+      return cost;
+    }
+    Edge* getNext() const {
+      return next;
     }
 
-    TreeNode* getLeftChild() {
-        return left;
+    void setNext(Edge* nextEdge) {
+      next = nextEdge;
     }
-
-    TreeNode* getRightChild() {
-        return right;
-    }
-
-    int getData() {
-        return data;
-    }
-
-    void addLeftChild(TreeNode* node) {
-        left = node;
-    }
-
-    void addRightChild(TreeNode* node) {
-        right = node;
+    void setDestination(int dest) {
+      destination = dest;
     }
 };
 
-class Tree {
+class Node {
+  private:
+    int data;
+    Node* next;
+    Edge* edges;
+    int edgeCount;
+
 public:
-    TreeNode* root;
+    Node(int val) : data(val), next(nullptr), edges(nullptr), edgeCount(0) {}
 
-    Tree() {
-        root = nullptr;
+    int getData() const {
+      return data;
+    }
+    Node* getNext() const {
+      return next;
+    }
+    Edge* getEdges() const {
+      return edges;
+    }
+    int getEdgeCount() const {
+      return edgeCount;
     }
 
-    void insertNode(int value) {
-        TreeNode* newNode = new TreeNode(value);
-        if (root == nullptr) {
-            root = newNode;
-            return;
-        }
-        queue<TreeNode*> que;
-        que.push(root);
-        while (!que.empty()) {
-            TreeNode* current = que.front();
-            que.pop();
-            if (current->left == nullptr) {
-                current->left = newNode;
-                return;
-            } else {
-                que.push(current->left);
-            }
-            if (current->right == nullptr) {
-                current->right = newNode;
-                return;
-            } else {
-                que.push(current->right);
-            }
-        }
+    void setNext(Node* nextNode) {
+      next = nextNode;
     }
-    void printTree() {
-        if (root == nullptr) return;
-        queue<TreeNode*> que;
-        que.push(root);
-        while (!que.empty()) {
-            TreeNode* current = que.front();
-            que.pop();
-            cout << current->data << " ";
-            if (current->left != nullptr) {
-                que.push(current->left);
-            }
-            if (current->right != nullptr) {
-                que.push(current->right);
-            }
-        }
-        cout << endl;
+    void setEdges(Edge* edgeList) {
+      edges = edgeList;
     }
+    void incrementEdgeCount() {
+      edgeCount++;
+    }
+    void decrementEdgeCount() {
+        edgeCount--;
+    }
+    void setData(int value) {
+      data = value;
+    }
+};
 
-    int getDegree(int data) {
-        TreeNode* current = root;
-        while (current != nullptr) {
-            if (current->data == data) {
-                int degree = 0;
-                if (current->left != nullptr) degree++;
-                if (current->right != nullptr) degree++;
-                return degree;
-            }
-            if (data < current->data) {
-                current = current->left;
-            } else {
-                current = current->right;
+class Graph {
+    Node* nodes;
+    int nodeCount;
+
+public:
+    Graph() : nodes(nullptr), nodeCount(0) {
+
+    }
+    void addNode(int nodeValue) {
+        if (!hasNode(nodeValue)) {
+            Node* newNode = new Node(nodeValue);
+            newNode->setNext(nodes);
+            nodes = newNode;
+            nodeCount++;
+        }
+    }
+    void addEdge(int source, int destination, int cost) {
+        Node* sourceNode = findNode(source);
+        Node* destinationNode = findNode(destination);
+        Edge* edge;
+        edge = sourceNode->getEdges();
+        while (edge) {
+            if (edge->getDestination() == destination)
+              return;
+            edge = edge->getNext();
+        }
+        Edge* newEdge;
+        newEdge = new Edge(destination, cost);
+        newEdge->setNext(sourceNode->getEdges());
+        sourceNode->setEdges(newEdge);
+        sourceNode->incrementEdgeCount();
+    }
+    int getEdgeCost(int source, int destination) const {
+        Node* sourceNode = findNode(source);
+        if (sourceNode) {
+            Edge* edge = sourceNode->getEdges();
+            while (edge) {
+                if (edge->getDestination() == destination) return edge->getCost();
+                edge = edge->getNext();
             }
         }
         return -1;
     }
-        int getTreeHeight() {
-            return getHeight(root);
-        }
-    int getHeight(TreeNode* node) {
-        if (node == nullptr) {
-            return -1;
-        }
-        int leftHeight = getHeight(node->getLeftChild());
-        int rightHeight = getHeight(node->getRightChild());
-        int maxHeight;
-        if (leftHeight > rightHeight) {
-            maxHeight = leftHeight;
+    int getEdgeCountForNode(int nodeValue) const {
+        Node* node;
+        node = findNode(nodeValue);
+        if (node) {
+            return node->getEdgeCount();
         } else {
-            maxHeight = rightHeight;
-        }
-        return 1 + maxHeight;
-    }
-        int getHeight(int data) {
-            TreeNode* current = root;
-            while (current != nullptr) {
-                if (current->data == data) {
-                    return getHeight(current);
-                }
-                if (data < current->data) {
-                    current = current->left;
-                } else {
-                    current = current->right;
-                }
-            }
             return -1;
         }
+    }
+    int getNodeCount() const {
+      return nodeCount;
+    }
+    void updateNode(int oldValue, int newValue) {
+        if (hasNode(newValue)){
+          return;
+        }
+        Node* node = findNode(oldValue);
+        if (node) {
+            node->setData(newValue);
+            Node* currentNode = nodes;
+            while (currentNode) {
+                Edge* edge = currentNode->getEdges();
+                while (edge) {
+                    if (edge->getDestination() == oldValue) edge->setDestination(newValue);
+                    edge = edge->getNext();
+                }
+                currentNode = currentNode->getNext();
+            }
+        }
+    }
+    void deleteNode(int nodeValue) {
+        Node* prevNode = nullptr;
+        Node* currentNode = nodes;
+        while (currentNode && currentNode->getData() != nodeValue) {
+            prevNode = currentNode;
+            currentNode = currentNode->getNext();
+        }
+        if (!currentNode){
+          return;
+          }
 
-    TreeNode* getRoot() {
-        return root;
+        if (prevNode) {
+            prevNode->setNext(currentNode->getNext());
+        } else {
+            nodes = currentNode->getNext();
+        }
+        Edge* edge = currentNode->getEdges();
+        while (edge) {
+            Edge* tempEdge = edge;
+            edge = edge->getNext();
+            delete tempEdge;
+        }
+        delete currentNode;
+        nodeCount--;
+        Node* otherNode = nodes;
+        while (otherNode) {
+            deleteEdge(otherNode->getData(), nodeValue);
+            otherNode = otherNode->getNext();
+        }
+    }
+    bool hasNode(int nodeValue) const {
+      return findNode(nodeValue) != nullptr;
+    }
+    void deleteEdge(int source, int destination) {
+        Node* sourceNode = findNode(source);
+        if (!sourceNode){
+          return;
+          }
+        Edge* prevEdge = nullptr;
+        Edge* currentEdge = sourceNode->getEdges();
+        while (currentEdge && currentEdge->getDestination() != destination) {
+            prevEdge = currentEdge;
+            currentEdge = currentEdge->getNext();
+        }
+        if (currentEdge) {
+            if (prevEdge) {
+                prevEdge->setNext(currentEdge->getNext());
+            } else {
+                sourceNode->setEdges(currentEdge->getNext());
+            }
+            delete currentEdge;
+            sourceNode->decrementEdgeCount();
+        }
+    }
+    Node* findNode(int value) const {
+        Node* current = nodes;
+        while (current) {
+            if (current->getData() == value){
+              return current;
+              }
+            current = current->getNext();
+        }
+        return nullptr;
     }
 };
+
 
 #endif
